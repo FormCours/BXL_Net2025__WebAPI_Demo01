@@ -42,11 +42,11 @@ namespace Demo_WebAPI_01.Controllers
         {
             Product? product = _productService.GetById(id);
 
-            if (product is null) 
+            if (product is null)
             {
                 return NotFound("Erreur : pas de produit trouvé");
             }
-            
+
             return Ok(new ProductDetailResponseDto()
             {
                 Id = product.Id,
@@ -57,5 +57,30 @@ namespace Demo_WebAPI_01.Controllers
             });
         }
 
+
+        // (POST) /api/product
+        [HttpPost]
+        public IActionResult AddProduct(ProductRequestDto data)
+        {
+            // Mapping des données du DTO vers le models
+            Product productToAdd = new Product()
+            {
+                Id = 0, // Initialisation de l'id avec une valeur érroné
+                Name = data.Name,
+                Description = data.Description,
+                Price = data.Price,
+                InStock = true
+            };
+
+            // Utilisation du service pour l'ajouter
+            Product result = _productService.Insert(productToAdd);
+
+            // Envoi d'une réponse adapté -> 201 Created
+            return CreatedAtAction(
+                nameof(GetProductById),     // L'action pour obtenir la ressource
+                new { id = result.Id },     // (Optionnel) Parametre pour l'action
+                result                      // Les données créer
+            );
+        }
     }
 }
