@@ -41,6 +41,7 @@ namespace Demo_WebAPI_01.Controllers
         public IActionResult GetProductById(int id)
         {
             Product? product = _productService.GetById(id);
+
             if (product is null) 
             {
                 return NotFound("Erreur : pas de produit trouvé");

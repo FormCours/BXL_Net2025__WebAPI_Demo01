@@ -25,6 +25,18 @@ namespace Demo_WebAPI_01.Services
 
         public Product? GetById(int id)
         {
+            //Product? result = null;
+            //foreach(Product p  in _products)
+            //{
+            //    if(p.Id == id)
+            //    {
+            //        if (result is not null) throw new Exception();
+
+            //        result = p;
+            //    }
+            //}
+            //return result;
+
             return _products.SingleOrDefault(p => p.Id == id);
         }
 
