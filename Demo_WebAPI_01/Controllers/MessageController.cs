@@ -34,5 +34,19 @@ namespace Demo_WebAPI_01.Controllers
             });
         }
 
+        // (GET) /api/message/salutation/robert
+        [HttpGet("salutation/{name}")]
+        public IActionResult SaySalutation(string name)
+        {
+            if(name.ToLower() == "gripsou")
+            {
+                return BadRequest();
+            }
+
+            return Ok(new MessageResponseDto()
+            {
+                Message = $"Bonjour {name} ! On fait la pause ?"
+            });
+        }
     }
 }
