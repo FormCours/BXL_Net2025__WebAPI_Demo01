@@ -5,6 +5,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // TODO Des trucs à découvrir :o
 
+// FIXME Ceux-ci sera expliqué jeudi, promis ! Bisous
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FFA", builder =>
+    {
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+        builder.AllowAnyOrigin();
+    });
+});
+
 // - Les controllers : Logique des endpoints de la Web API
 builder.Services.AddControllers();
 
@@ -27,6 +38,9 @@ if (app.Environment.IsDevelopment())
 }
 
 // Middleware intégré à la requete
+
+// - ...
+app.UseCors("FFA");
 
 // - Redirection vers du HTTPS
 app.UseHttpsRedirection();
