@@ -43,6 +43,9 @@ if (app.Environment.IsDevelopment())
 // - Utilise la regle "cors" précédement configuré
 app.UseCors("AllowAll");
 
+// - Autoriser d'acceder au contenu du dossier public (wwwroot)
+app.UseStaticFiles();
+
 // - Redirection vers du HTTPS
 app.UseHttpsRedirection();
 
