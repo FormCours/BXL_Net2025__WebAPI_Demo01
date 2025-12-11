@@ -5,10 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // TODO Des trucs à découvrir :o
 
-// FIXME Ceux-ci sera expliqué jeudi, promis ! Bisous
+// Configuration de la sécurité cors
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("FFA", builder =>
+    // Ajout une régle -> Tout autorisé (dev uniquement)
+    options.AddPolicy("AllowAll", builder =>
     {
         builder.AllowAnyHeader();
         builder.AllowAnyMethod();
@@ -39,8 +40,8 @@ if (app.Environment.IsDevelopment())
 
 // Middleware intégré à la requete
 
-// - ...
-app.UseCors("FFA");
+// - Utilise la regle "cors" précédement configuré
+app.UseCors("AllowAll");
 
 // - Redirection vers du HTTPS
 app.UseHttpsRedirection();
